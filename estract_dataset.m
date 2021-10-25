@@ -34,12 +34,12 @@ function [X_TrainingSet, T_TrainingSet, X_ValidationSet, T_ValidationSet, X_Test
         T_ValidationSet(i, Y_ValidationSet(i)+1) = 1; 
 
     %10000 images of size 28x28
-    X = loadMNISTImages('Dataset/t10k-images-idx3-ubyte');
-    Y = loadMNISTLabels('Dataset/t10k-labels-idx1-ubyte');
+    X = loadMNISTImages('mnist/t10k-images-idx3-ubyte');
+    Y = loadMNISTLabels('mnist/t10k-labels-idx1-ubyte');
     X_TestSet = X';
     
     %images number reduction
-    ind_Dataset = riduci_dataset(Y);
+    ind_Dataset = dataset_reduction(Y);
     X_TestSet = X_TestSet(ind_Dataset, :);
     Y = Y(ind_Dataset, :);
 
