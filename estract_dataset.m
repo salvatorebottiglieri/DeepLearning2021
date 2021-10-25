@@ -7,7 +7,7 @@ function [X_TrainingSet, T_TrainingSet, X_ValidationSet, T_ValidationSet, X_Test
     X = X';
     
     %images number reduction to 0.25 ratio 
-    ind_Dataset = riduci_dataset(Y, 0.25);
+    ind_Dataset = dataset_reduction(Y, 0.25);
     X = X(ind_Dataset, :);
     Y = Y(ind_Dataset, :);
     
@@ -34,8 +34,8 @@ function [X_TrainingSet, T_TrainingSet, X_ValidationSet, T_ValidationSet, X_Test
         T_ValidationSet(i, Y_ValidationSet(i)+1) = 1; 
 
     %10000 images of size 28x28
-    X = loadMNISTImages('mnist/t10k-images-idx3-ubyte');
-    Y = loadMNISTLabels('mnist/t10k-labels-idx1-ubyte');
+    X = loadMNISTImages('Dataset/t10k-images-idx3-ubyte');
+    Y = loadMNISTLabels('Dataset/t10k-labels-idx1-ubyte');
     X_TestSet = X';
     
     %images number reduction
