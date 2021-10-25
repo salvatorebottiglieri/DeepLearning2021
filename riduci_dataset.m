@@ -1,4 +1,4 @@
-function ind_Dataset = dataset_reduction(Y, valPercent)
+function ind_Dataset = riduci_dataset(Y, valPercent)
     if nargin < 2
         %Di default viene preso un mezzo del dataset
         valPercent = 0.5;
