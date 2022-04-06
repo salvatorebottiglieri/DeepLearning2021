@@ -1,4 +1,4 @@
-fid = fopen('risultati_test_PQ.csv', 'a+');
+fid = fopen('risultati_test_PQ.csv', 'w');
 fprintf(fid, '%s, %s, %s, %s, %s\n', 'Alfa', 'Accuracy', 'Errore Test Set', 'Epoca della miglior rete', 'Epoca di stop');
 NUM_TEST = 10;
 NUM_NODI_INTERNI = 80;
@@ -22,7 +22,7 @@ for a = ALFA
         %Crea una nuova rete con un opportuno numero di input, un solo strato 
         %interno con il numero di nodi stabilito e 10 nodi di output (uno per
         %ogni possibile classe)
-        net = newNet([size(X_TrainingSet, 2) NUM_NODI_INTERNI 10]);
+        net = newNet([size(X_TrainingSet, 2) NUM_NODI_INTERNI 10],[1]);
 
         %Esegue un addestramento della rete con i parametri stabiliti per il
         %criterio di stop
@@ -44,13 +44,13 @@ for a = ALFA
     end
 
     %Calcolo accuratezza media
-    accuracy = media(accTest);
+    accuracy = mean(accTest);
     %Calcolo errore medio sul Test Set
-    errore_TestSet = media(Ete);
+    errore_TestSet = mean(Ete);
     %Calcolo epoca media in cui è stata individuata la miglior rete
-    epoca_migliore = round(media(best_epoca));
+    epoca_migliore = round(mean(best_epoca));
     %Calcolo l'epoca media di stop 
-    epoca_stop = round(media(stop));
+    epoca_stop = round(mean(stop));
     
 
     %Stampe

@@ -9,14 +9,16 @@ function [WGradient, BGradient]=backProp(net, X, T)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %Calcolo dei delta per i nodi di output (ovvero le derivate della 
     %funzione di errore rispetto ai pesi). La formula utilizzata è valida
-    %nel caso in cui la funzione di output sia la softmax e la funzione di 
-    %errore sia la cross-entropy: si sottrae componente per componente la
+    %nel caso in cui la funzione di output sia la softmax, o la funzione identità,
+    % e la funzione di errore sia la cross-entropy, o, rispettivamente, la 
+    % somma dei quadrati: si sottrae componente per componente la
     %matrice dei target alla matrice di output, ottenendo la matrice dei
     %delta con tante righe quante sono le immagini del Set e tante colonne
     %quanti sono i nodi dello strato corrente (in questo caso l'ultimo)
     delta{end} = net.Z{end} - T; 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
+    delta = calcola_delta(net,X,T);
     %Calcolo dei delta per i nodi interni
     for l = net.numLayers - 1 : -1 : 1
         delta{l} = delta{l+1} * net.W{l+1};

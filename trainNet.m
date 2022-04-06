@@ -8,15 +8,18 @@ function [bestNet, epoca_stop, Tm] = trainNet(net, X_TrainingSet, T_TrainingSet,
     Etr = zeros(1,MAX_EPOCHES);
     %Array di errori sul ValidationSet
     Eva = zeros(1,MAX_EPOCHES);
+
+    step_max = 50;
+    step_min = 0;
     
     for numEpoch = 1 : MAX_EPOCHES
 
         %BATCH LEARNING
         [WGradient,BGradient] = backProp(net,X_TrainingSet, T_TrainingSet);
-        net = RProp(net, WGradient, BGradient, eta_p, eta_m);
+        net = RProp(net, WGradient, BGradient, eta_p, eta_m, step_max, step_min);
 
         net = forwardProp(net, X_TrainingSet);
-        %Calcolare l'errore sul Traning
+        %Calcolare l'errore sul Training
         Etr(numEpoch) = cross_entropy(net.Z{end}, T_TrainingSet);
 
         net = forwardProp(net, X_ValidationSet);
